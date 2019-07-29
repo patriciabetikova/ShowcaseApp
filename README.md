@@ -12,7 +12,7 @@ Login form is pre-filled with valid login data, but feel free to create your own
 
 Backend is deployed to heroku, where with no traffic in 1 hour is set automatically to sleep, therefore **first HTTP request might take noticeably long**, but afterwards will run quick and smooth.
 
-[Showcase App](https://patriciabetikova.github.io/event/2224)
+[Showcase App](https://patriciabetikova.github.io/)
 
 ## How to run locally
 
