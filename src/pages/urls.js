@@ -4,6 +4,7 @@ import { EventCreatePage } from "pages/EventCreatePage"
 import { RegisterPage } from "pages/RegisterPage"
 import { ProfilePage } from "pages/ProfilePage"
 import { EventDetailPage } from "pages/EventDetailPage"
+import { NotFoundPage } from "pages/NotFoundPage"
 
 export const types = {
   loggedOut: "loggedOut",
@@ -42,5 +43,11 @@ export const urls = {
     path: "/register",
     url: "/register",
     type: types.loggedOut,
+  },
+  notFound: {
+    component: NotFoundPage,
+    path: "*",
+    url: "*",
+    type: types.default,
   },
 }

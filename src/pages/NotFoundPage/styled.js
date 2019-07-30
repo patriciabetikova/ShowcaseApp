@@ -2,7 +2,9 @@ import styled from "styled-components/macro"
 import { theme } from "theme"
 
 export const StyledBackground = styled.div`
-  height: 100%;
+  background: ${theme.color.lightgrey};
+  margin: 0;
+  height: 100vh;
   width: 100%;
   display: flex;
   justify-content: center;
