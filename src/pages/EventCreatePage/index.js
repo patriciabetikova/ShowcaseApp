@@ -17,7 +17,7 @@ import { Textarea } from "inputs/Textarea"
 
 const enhancer = R.compose(
   withPage(() => ({
-    link: { text: "← Home", url: urls.home.url },
+    link: { text: "Home", url: urls.home.url },
   })),
   withForm({
     schema: {

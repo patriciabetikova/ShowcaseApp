@@ -18,5 +18,6 @@ export const StyledHeader = styled.div`
 export const StyledLink = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   color: ${theme.color.primary};
 `

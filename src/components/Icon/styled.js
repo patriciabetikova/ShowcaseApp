@@ -26,6 +26,7 @@ export const IconWrapper = styled.div`
   ${p =>
     p.primaryFill &&
     css`
+      color: ${theme.color.primary};
       fill: ${theme.color.primary};
     `}
   ${p =>

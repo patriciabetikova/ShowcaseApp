@@ -16,7 +16,7 @@ import { Link } from "components/Link"
 const enhancer = R.compose(
   withData(() => eventsRequest.list()),
   withPage(() => ({
-    link: { text: "← Home", url: urls.home.url },
+    link: { text: "Home", url: urls.home.url },
   })),
 )
 

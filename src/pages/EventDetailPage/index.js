@@ -14,7 +14,7 @@ import { DeleteModal } from "./DeleteModal"
 
 const enhancer = R.compose(
   withPage(() => ({
-    link: { text: "← Home", url: urls.home.url },
+    link: { text: "Home", url: urls.home.url },
   })),
   withData(props => eventsRequest.detail(props.match.params.id)),
 )

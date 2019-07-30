@@ -6,6 +6,8 @@ import { StyledHeader, StyledLink } from "./styled"
 import { logout } from "data/auth/rx"
 import { Link } from "components/Link"
 import { Logo } from "components/Logo"
+import { Icon } from "components/Icon"
+import { ArrowRight } from "assets/icons/ArrowRight"
 
 const enhancer = withRouter
 
@@ -16,7 +18,10 @@ export const Header = enhancer(({ link, user }) => (
     </Link>
     {link && (
       <Link to={link.url}>
-        <StyledLink>{link.text}</StyledLink>
+        <StyledLink>
+          <Icon icon={ArrowRight} primaryFill rotate />
+          {link.text}
+        </StyledLink>
       </Link>
     )}
     <User

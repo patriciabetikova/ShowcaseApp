@@ -7,10 +7,11 @@ export const StyledItem = styled.div`
   :hover {
     background: ${theme.color.lightgrey};
   }
+  line-height: 2.5;
   ${p =>
     p.active &&
     css`
       background: ${theme.color.lightgrey};
       cursor: default;
-    `}
+    `};
 `

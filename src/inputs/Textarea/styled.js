@@ -11,7 +11,7 @@ export const StyledTextarea = styled.textarea`
   max-width: 100%;
   min-height: 9rem;
   padding: 1rem;
-  line-height: 1.3;
+  line-height: 1.5;
   display: block;
   border-radius: 0rem;
   -webkit-border-radius: 0rem;
