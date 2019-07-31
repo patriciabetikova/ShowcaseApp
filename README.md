@@ -10,8 +10,6 @@ Login form is pre-filled with valid login data, but feel free to create your own
 
 Backend is deployed to heroku, where with no traffic in 1 hour is set automatically to sleep, therefore **first HTTP request might take noticeably long**, but afterwards will run quick and smooth.
 
-**Reloading other than Homepage will cause 404 page to appear** due to GitHub pages settings.
-
 [Showcase App](https://patriciabetikova.github.io/)
 
 ## How to run locally
