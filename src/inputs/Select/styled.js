@@ -34,7 +34,7 @@ export const InputIcon = styled(Icon)`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  right: 0;
+  right: 0.5rem;
   pointer-events: none;
   display: flex;
 `

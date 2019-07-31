@@ -1,14 +1,14 @@
 import React from "react"
-import { BrowserRouter } from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 import { Content } from "./Content"
 import { GlobalStyle } from "./GlobalStyle"
 import { ErrorBoundary } from "components/ErrorBoundary"
 
 export const App = () => (
-  <BrowserRouter>
+  <HashRouter>
     <GlobalStyle />
     <ErrorBoundary>
       <Content />
     </ErrorBoundary>
-  </BrowserRouter>
+  </HashRouter>
 )

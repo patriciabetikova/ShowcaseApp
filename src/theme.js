@@ -16,7 +16,7 @@ export const theme = {
     darkgrey: "#323c46",
     success: "#1ed760",
     warning: "#ffa71c",
-    error: "#FF2323",
+    error: "#ED4956",
   },
   zIndices: {
     backdrop: 1,

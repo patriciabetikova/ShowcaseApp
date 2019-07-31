@@ -47,7 +47,6 @@ export const urls = {
   notFound: {
     component: NotFoundPage,
     path: "*",
-    url: "*",
     type: types.default,
   },
 }

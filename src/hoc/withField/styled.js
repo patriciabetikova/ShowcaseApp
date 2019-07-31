@@ -18,6 +18,6 @@ export const StyledLabel = styled.label`
 `
 
 export const ErrorMessage = styled.p`
-  color: red;
+  color: ${theme.color.error};
   margin: 5px 0 0;
 `
