@@ -1,55 +1,68 @@
-import React from "react"
-import { Formik } from "formik"
-import * as Yup from "yup"
+import React, { useState } from "react"
 import * as R from "ramda"
-import { Loader } from "components/Loader"
 import { withRouter } from "react-router-dom"
 import { toastError } from "data/toasts/rx"
+import { Loader } from "components/Loader"
+
+export const context = React.createContext()
+
+const defaultHandler = () => () => {}
 
 export const withForm = ({
-  schema,
   onSubmit,
-  onSuccess = R.always(R.always()),
+  onSuccess = defaultHandler,
   initialValues = R.always({}),
+  getSchema = R.always({}),
   redirect,
 }) =>
   R.compose(
     withRouter,
-    Component => props => (
-      <Formik
-        validationSchema={Yup.object(schema)}
-        initialValues={initialValues(props)}
-        onSubmit={(values, form) => {
-          form.setSubmitting(true)
-          onSubmit(props)(values)
-            .then(response => {
-              onSuccess(props)(response)
-              form.setSubmitting(false)
-              if (redirect) {
-                props.history.push(redirect(props)(response))
-              }
-            })
-            .catch(err => {
-              form.setSubmitting(false)
-              toastError(
-                R.pathOr("Unknown error", ["response", "data", "message"], err),
-              )
-            })
-        }}
-        render={p => (
-          <>
-            <form
-              onSubmit={e => {
-                p.submitForm()
-                e.stopPropagation()
-                e.preventDefault()
-              }}
-            >
-              <Component {...props} form={p} />
-            </form>
-            {p.isSubmitting && <Loader />}
-          </>
-        )}
-      />
-    ),
+    Component => props => {
+      const schema = getSchema(props)
+      const initValues = initialValues(props)
+      const [form, setForm] = useState({
+        values: initValues,
+        errors: R.mapObjIndexed((value, key) => value(initValues[key]), schema),
+        touched: {},
+        isSubmitting: false,
+      })
+      const handleSubmit = e => {
+        e.preventDefault()
+        setForm(oldState => ({ ...oldState, isSubmitting: true }))
+        onSubmit(props)(form.values)
+          .then(response => {
+            onSuccess(props)(response)
+            setForm(oldState => ({ ...oldState, isSubmitting: false }))
+            if (redirect) {
+              props.history.push(redirect(props)(response))
+            }
+          })
+          .catch(err => {
+            setForm(oldState => ({ ...oldState, isSubmitting: false }))
+            toastError(
+              R.pathOr("Unknown error", ["response", "data", "message"], err),
+            )
+          })
+      }
+
+      return (
+        <context.Provider
+          value={{
+            form,
+            onChange: name => val =>
+              setForm(oldState => ({
+                ...oldState,
+                values: { ...oldState.values, [name]: val },
+                touched: { ...oldState.touched, [name]: true },
+                errors: { ...oldState.errors, [name]: schema[name](val) },
+              })),
+          }}
+        >
+          <form onSubmit={handleSubmit}>
+            <Component {...props} />
+          </form>
+          {form.isSubmitting && <Loader />}
+        </context.Provider>
+      )
+    },
   )

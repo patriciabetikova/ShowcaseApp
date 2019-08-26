@@ -16,13 +16,13 @@ import { DatePicker } from "inputs/DatePicker"
 const enhancer = R.compose(
   withForm({
     initialValues: R.prop("event"),
-    schema: {
+    getSchema: () => ({
       title: stringRequired,
       description: stringRequired,
       date: stringRequired,
       time: stringRequired,
       capacity: numberRequired,
-    },
+    }),
     onSubmit: props => eventsRequest.edit(props.match.params.id),
     redirect: props => result => urls.home.url,
   }),

@@ -20,17 +20,19 @@ import { Logo } from "components/Logo"
 const enhancer = R.compose(
   withGradient,
   withForm({
-    schema: {
+    getSchema: () => ({
       firstName: stringRequired,
       lastName: stringRequired,
       email: stringRequired,
-      password: stringRequired.test("", "", isPasswordStrong),
-      confPassword: stringRequired.test("", "Passwords don't match", function(
-        x,
-      ) {
-        return x === this.parent.password
-      }),
-    },
+      password: stringRequired,
+      // .test("", "", isPasswordStrong),
+      confPassword: stringRequired,
+      // .test("", "Passwords don't match", function(
+      //   x,
+      // ) {
+      //   return x === this.parent.password
+      // }),
+    }),
     onSubmit: props => registerRequest,
     onSuccess: props => login,
   }),

@@ -20,13 +20,13 @@ const enhancer = R.compose(
     link: { text: "Home", url: urls.home.url },
   })),
   withForm({
-    schema: {
+    getSchema: () => ({
       title: stringRequired,
       description: stringRequired,
       date: stringRequired,
       time: stringRequired,
       capacity: numberRequired,
-    },
+    }),
     onSubmit: props => eventsRequest.create,
     onSuccess: props => response => toastSuccess("Event successfully created"),
     redirect: props => result => urls.home.url,

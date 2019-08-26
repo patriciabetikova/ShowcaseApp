@@ -5,7 +5,7 @@ import { PasswordField } from "inputs/PasswordField"
 import { StyledForm } from "styled/form"
 import { withForm } from "hoc/withForm"
 import { withGradient } from "hoc/withGradient"
-import { stringRequired } from "validators"
+import { stringRequired, emailRequired } from "validators"
 import { loginRequest } from "data/auth/api"
 import * as R from "ramda"
 import { login } from "data/auth/rx"
@@ -23,10 +23,10 @@ import {
 const enhancer = R.compose(
   withGradient,
   withForm({
-    schema: {
-      email: stringRequired,
+    getSchema: () => ({
+      email: emailRequired,
       password: stringRequired,
-    },
+    }),
     onSubmit: props => loginRequest,
     onSuccess: props => login,
     initialValues: () => ({

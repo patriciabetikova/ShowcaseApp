@@ -1,9 +1,38 @@
 import React from "react"
 import { Field } from "formik"
 import { FieldWrapper, StyledLabel, ErrorMessage } from "./styled"
+import { context } from "hoc/withForm"
 
 export const withField = Component => ({ label, name, noMargin, ...props }) => {
-  if (!name) return <Component {...props} />
+  if (!name)
+    return (
+      <>
+        {label && <StyledLabel>{label}</StyledLabel>}
+        <Component {...props} />
+      </>
+    )
+
+  return (
+    <context.Consumer>
+      {val => {
+        console.log(val.form.erros, "errors")
+        const error = val.form.errors[name]
+        const touched = val.form.touched[name]
+        return (
+          <FieldWrapper noMargin={noMargin}>
+            <StyledLabel>{label}</StyledLabel>
+            <Component
+              {...props}
+              value={val.form.values[name]}
+              onChange={val.onChange(name)}
+              // onBlur={}
+            />
+            {error && touched && <ErrorMessage>{error}</ErrorMessage>}
+          </FieldWrapper>
+        )
+      }}
+    </context.Consumer>
+  )
   return (
     <Field
       render={({ form }) => {
